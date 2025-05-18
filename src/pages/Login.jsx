@@ -1,23 +1,24 @@
-import { useState } from "react"
-import { useLocation } from "react-router"
-import '../assets/login.css'
-
-const API_URL = import.meta.env.VITE_API_URL
+import { useState } from 'react';
+import { useLocation } from 'react-router';
+import { useAuth } from '../AuthContext';
+import '../assets/login.css';
 
 export default function Login() {
-  const location = useLocation()
-  const initialForm = location.state?.activeForm || 'login'
-  const [activeForm, setActiveForm] = useState(initialForm)
+  const API_URL = import.meta.env.VITE_API_URL;
 
-  const [signupData, setSignupData] = useState({ username: '', email: '', password: '' })
-  const [loginData, setLoginData] = useState({ email: '', password: '' })
+  const location = useLocation();
+  const initialForm = location.state?.activeForm || 'login';
+  const [activeForm, setActiveForm] = useState(initialForm);
+
+  const [signupData, setSignupData] = useState({ username: '', email: '', password: '' });
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
 
   const handleSignupChange = (e) => {
-    setSignupData({ ...signupData, [e.target.name]: e.target.value })
+    setSignupData({ ...signupData, [e.target.name]: e.target.value });
   }
 
   const handleLoginChange = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value })
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   }
 
   const handleSignup = async () => {
@@ -26,11 +27,12 @@ export default function Login() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(signupData),
-      })
-      const data = await response.text()
-      console.log('Signup response:', data)
+      });
+      const data = await response.text();
+      console.log('Signup response:', data);
+      loginUser(data);
     } catch (err) {
-      console.error('Signup error:', err)
+      console.error('Signup error:', err);
     }
   }
 
@@ -40,11 +42,24 @@ export default function Login() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData),
-      })
-      const data = await response.text()
-      console.log('Login response:', data)
+      });
+      const data = await response.text();
+      console.log('Login response:', data);
+      loginUser(data);
     } catch (err) {
-      console.error('Login error:', err)
+      console.error('Login error:', err);
+    }
+  }
+
+  const { login } = useAuth();
+
+  const loginUser = (response) => {
+    let userdata = JSON.parse(response);
+    if (userdata.token) {
+      login(userdata.token);
+      console.log("Hi " + userdata.username);
+    } else {
+      console.error("No token in response! " + response);
     }
   }
 
@@ -86,5 +101,5 @@ export default function Login() {
         </div>
       </div>
     </div >
-  )
+  );
 }
