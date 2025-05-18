@@ -1,10 +1,13 @@
 import { useState } from "react"
+import { useLocation } from "react-router"
 import '../assets/login.css'
 
 const API_URL = import.meta.env.VITE_API_URL
 
 export default function Login() {
-  const [activeForm, setActiveForm] = useState('login')
+  const location = useLocation()
+  const initialForm = location.state?.activeForm || 'login'
+  const [activeForm, setActiveForm] = useState(initialForm)
 
   const [signupData, setSignupData] = useState({ username: '', email: '', password: '' })
   const [loginData, setLoginData] = useState({ email: '', password: '' })
