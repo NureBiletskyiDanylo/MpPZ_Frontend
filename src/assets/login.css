@@ -1,0 +1,140 @@
+.form-stack {
+  position: relative;
+  width: 540px;
+  height: 440px;
+  margin: 50px auto;
+}
+
+.card-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.card-tab {
+  color: #f7f7f7;
+  background: #8a5a44;
+  border-radius: 14px 14px 0 0;
+  z-index: 1;
+}
+
+.card-tab p {
+  margin: 5px;
+  font-weight: bolder;
+  font-family: sans;
+  font-size: 20px;
+}
+
+.card-tab.active {
+  z-index: 2;
+  background: #b07d62;
+}
+
+.form-card {
+  padding: 40px;
+  height: 100%;
+  box-shadow: 0 8px 8px -4px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.4s ease;
+  background: #8a5a44;
+  z-index: 1;
+  color: #f7f7f7;
+}
+
+.form-card.active {
+  z-index: 2;
+  background: #b07d62;
+}
+
+.login {
+  margin-left: 20px;
+}
+
+.login-tab {
+  margin-left: 77%;
+  width: 23%;
+  padding: 5px 0 10px 0;
+}
+
+.login-card {
+  border-radius: 14px 0 14px 14px;
+  position: relative;
+}
+
+.signup {
+  margin-right: 20px;
+}
+
+.signup-card {
+  border-radius: 0 14px 14px 14px;
+}
+
+.signup-tab {
+  margin-right: 77%;
+  width: 23%;
+}
+
+.form-card input {
+  /*FIXME: make inputs same width with the buttons*/
+  width: 94%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #ede0d4;
+  background: #b07d62;
+  color: #f7f7f7;
+  border-radius: 6px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.main-button {
+  width: 100%;
+  padding: 10px;
+  background: #8a5a44;
+  color: #f7f7f7;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: medium;
+}
+
+.main-button:hover {
+  background-color: #704c44;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.button-group button {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  border: 3px solid #ede0d4;
+  background: #b07d62;
+  color: #f7f7f7;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: medium;
+}
+
+.button-group button:hover {
+  background-color: #8a5a44;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
