@@ -24,7 +24,7 @@
     z-index: 1000;
 }
 
-.custum-file-upload {
+.form-container .custum-file-upload {
     height: 200px;
     width: 200px;
     display: flex;
@@ -39,29 +39,29 @@
     border-radius: 10px;
 }
   
-.custum-file-upload .icon {
+.form-container .custum-file-upload .icon {
     display: flex;
     align-items: center;
     justify-content: center;
 }
   
-.custum-file-upload .upload-image {
+.form-container .custum-file-upload .upload-image {
     height: 80px;
     width: 80px;
 }
   
-.custum-file-upload .upload-text {
+.form-container .custum-file-upload .upload-text {
     display: flex;
     align-items: center;
     justify-content: center;
 }
   
-.custum-file-upload .upload-text span {
+.form-container .custum-file-upload .upload-text span {
     font-weight: 500;
     font-size: 15px;
 }
   
-.custum-file-upload input {
+.form-container .custum-file-upload input {
     display: none;
 }
 

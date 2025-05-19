@@ -21,7 +21,7 @@ function AlbumPage() {
             <div className='album-profile'>
                 <AlbumInfo 
                     onEditAlbum={() => setShowAlbumForm(true)}
-                    onCreateAlbum={() => setShowAlbumForm(true)}
+                    onCreatePage={() => navigate('/create-page')}
                 />
 
                 <div className='page-list'>
