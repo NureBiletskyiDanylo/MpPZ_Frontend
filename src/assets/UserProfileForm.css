@@ -1,0 +1,141 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.form-container {
+    background-color: #B07D62;
+    border-radius: 8px;
+    padding: 32px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    max-width: 660px;
+    height: fit-content;
+    width: fit-content;
+    z-index: 1000;
+}
+
+.custum-file-upload {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #EDE0D4;
+    background-color: #8A5A44;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+  
+.custum-file-upload .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.custum-file-upload .upload-image {
+    height: 80px;
+    width: 80px;
+}
+  
+.custum-file-upload .upload-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.custum-file-upload .upload-text span {
+    font-weight: 500;
+    font-size: 15px;
+}
+  
+.custum-file-upload input {
+    display: none;
+}
+
+.form-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.field-wrapper {
+    position: relative;
+}
+
+.input-field {
+    width: 100%;
+    height: 48px;
+    padding: 8px 16px 8px;
+    border: 1px solid #EDE0D4;
+    border-radius: 4px;
+    background-color: unset;
+    color: #f7f7f7;
+    font-size: 20px;
+    font-weight: 400;
+    outline: none;
+}
+
+.label-text {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: #B07D62;
+    padding: 0 5px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.cancel-button {
+    border: solid 2px #f7f7f7;
+    border-radius: 8px;
+    background-color: unset;
+    color: #f7f7f7;
+    width: 150px;
+    height: 48px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    border: #9C6B52;
+    background-color: #9C6B52;
+}
+
+.save-button {
+    border: solid 2px #8A5A44;
+    border-radius: 8px;
+    background-color: #8A5A44;
+    color: #f7f7f7;
+    width: 150px;
+    height: 48px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    border: #9C674F;
+    background-color: #9C674F;
+}
