@@ -7,19 +7,21 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
-    if (token) {
-      //TODO: validate token and log user out if invalid
-      setUser({ token });
+    const username = localStorage.getItem('username');
+    if (token && username) {
+      setUser({ token, username });
     }
   }, []);
 
-  const login = (token) => {
+  const login = (token, username) => {
     localStorage.setItem('authToken', token);
-    setUser({ token });
+    localStorage.setItem('username', username);
+    setUser({ token, username });
   };
 
   const logout = () => {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('username');
     setUser(null);
   };
 

@@ -8,7 +8,7 @@ export default function Login() {
     <>
       <Header />
       {user ? (
-        <h1>Hi user!</h1> //FIXME: placeholder for actual logged-in user homepage
+        <h1>Hi {user.username}</h1> //FIXME: placeholder for actual logged-in user homepage
       ) : (
         <div className="showcase">
           <img src="/father-and-daughter.png" />

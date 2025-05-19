@@ -23,6 +23,7 @@ export default function Login() {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   }
 
+  //TODO: check that sign up / log in forms are filled with valid data
   const handleSignup = async () => {
     try {
       const response = await fetch(`${API_URL}/api/Account/register`, {
@@ -67,7 +68,7 @@ export default function Login() {
   const loginUser = (response) => {
     let userdata = JSON.parse(response);
     if (userdata.token) {
-      login(userdata.token);
+      login(userdata.token, userdata.username);
       toast.success("Welcome, " + userdata.username);
       navigate("/");
     } else {
