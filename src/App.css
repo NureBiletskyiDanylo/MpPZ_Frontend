@@ -1,9 +1,5 @@
-html, body {
-  /*FIXME: this is a hack to ensure that bottom image actually sticks to the bottom*/
-  height: 100%;
-  margin: 0 auto;
-  text-align: center;
-
+html {
+  min-height: 100%;
   background-color: #ede0d4;
 
   background-image:
@@ -25,6 +21,11 @@ html, body {
   background-attachment:
     scroll,
     scroll;
+}
+
+body {
+  margin: 0 auto;
+  text-align: center;
 }
 
 .noselect {
