@@ -1,6 +1,6 @@
 import profileIcon from '/profile-icon.png' 
-import editProfile from '/edit.png'
-import addAlbum from '/add.png'
+import edit from '/edit.png'
+import add from '/add.png'
 
 function UserInfo({ onEditProfile, onCreateAlbum}) {
     return(
@@ -15,11 +15,11 @@ function UserInfo({ onEditProfile, onCreateAlbum}) {
                 <p>Albums: 3</p>
             </div>
             <button className='button' onClick={onEditProfile}>
-                <img src={editProfile} alt='Edit' className='button-icon' />
+                <img src={edit} alt='Edit' className='button-icon' />
                 Edit profile
             </button>
             <button className='button' onClick={onCreateAlbum}>
-                <img src={addAlbum} alt='Add album' className='button-icon' />
+                <img src={add} alt='Add album' className='button-icon' />
                 Create a new album
             </button>
         </div>

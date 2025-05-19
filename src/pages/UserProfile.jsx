@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router'
 import Header from '../components/LoggedHeader.jsx'
 import UserInfo from '../components/UserInfo.jsx'
 import AlbumCard from '../components/AlbumCard.jsx'
 import EditProfileForm from '../components/EditProfileForm.jsx'
-import CreateAlbumForm from '../components/CreateAlbumForm.jsx';
+import CreateAlbumForm from '../components/CreateAlbumForm.jsx'
 import '../assets/UserProfile.css'
 
 function UserProfile() {
@@ -14,11 +14,11 @@ function UserProfile() {
 
     const handleEditProfile = async (formData) => {
         setShowEditForm(false);
-    }
+    };
 
     const handleCreateAlbum = async (formData) => {
         setShowAlbumForm(false);
-    }
+    };
 
     return(
         <>
