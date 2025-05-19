@@ -86,9 +86,18 @@ export default function Login() {
           <p className="noselect">Sign up</p>
         </div>
         <div className={`form-card signup-card ${activeForm === 'signup' ? 'active' : ''}`}>
-          <input name="username" type="text" placeholder="Name" value={signupData.name} onChange={handleSignupChange} />
-          <input name="email" type="email" placeholder="Email" value={signupData.email} onChange={handleSignupChange} />
-          <input name="password" type="password" placeholder="Password" value={signupData.password} onChange={handleSignupChange} />
+          <div className='field-wrapper'>
+            <input name='username' type="text" placeholder='' id='name'value={signupData.name} onChange={handleSignupChange} />
+            <label htmlFor='name' className='label-text'>Name</label>
+          </div>
+          <div className='field-wrapper'>
+            <input name='email' type="email" placeholder='' id='email-sign-up'value={signupData.email} onChange={handleSignupChange} />
+            <label htmlFor='email-sign-up' className='label-text'>Email</label>
+          </div>
+          <div className='field-wrapper'>
+            <input name='password' type="password" placeholder='' id='password-sign-up' value={signupData.password} onChange={handleSignupChange} />
+            <label htmlFor='password-sign-up' className='label-text'>Password</label>
+          </div>
           <div className="button-group">
             <button className="social-button">
               <img src="/google.png" alt="Google" />
@@ -111,8 +120,14 @@ export default function Login() {
           <p className="noselect">Login</p>
         </div>
         <div className={`form-card login-card ${activeForm === 'login' ? 'active' : ''}`}>
-          <input name="email" type="email" placeholder="Email" value={loginData.email} onChange={handleLoginChange} />
-          <input name="password" type="password" placeholder="Password" value={loginData.password} onChange={handleLoginChange} />
+          <div className='field-wrapper'>
+            <input name='email' type='email' placeholder='' id='email'value={loginData.email} onChange={handleLoginChange} />
+            <label htmlFor='email' className='label-text'>Email</label>
+          </div>
+          <div className='field-wrapper'>
+            <input name='password' type='password' placeholder='' id='password' value={loginData.password} onChange={handleLoginChange} />
+            <label htmlFor='password' className='label-text'>Password</label>
+          </div>
           <div className="button-group">
             <button className="social-button">
               <img src="/google.png" alt="Google" />

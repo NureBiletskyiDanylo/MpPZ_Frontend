@@ -1,6 +1,12 @@
 .showcase {
   display: flex;
   margin: 8rem;
+  justify-content: center;
+}
+
+.showcase img {
+  width: 330px;
+  height: 330px;
 }
 
 .pitch {
@@ -11,25 +17,41 @@
 
 .pitch h1 {
   color: #8a5a44;
-  font-family: sans;
   margin-bottom: 0.5rem;
+  font-size: 40px;
 }
 
 .pitch h2 {
   color: #8a5a44;
-  font-family: sans;
 }
 
 .pitch p {
   color: #b07d62;
-  font-family: sans;
+  font-size: 18px;
+}
+
+.pitch-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pitch-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
 }
 
 .pitch-card {
   display: flex;
   align-items: center;
+  width: 75%;
   border: 3px solid #8a5a44;
   border-radius: 8px;
+  min-height: 140px;
+  min-width: 495px;
 }
 
 .pitch-card-number {

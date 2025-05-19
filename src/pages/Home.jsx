@@ -16,29 +16,33 @@ export default function Login() {
         <>
           <Header />
           <div className="showcase">
-            <img src="/father-and-daughter.png" />
             <div className="pitch">
               <h1>Preserve every childhood smile in digital format</h1>
-              <div className="pitch-card">
-                <div className="pitch-card-number">
-                  <h1>1</h1>
+              <div className="pitch-main">
+                <img src="/father-and-daughter.png" />
+                <div className="pitch-cards">
+                  <div className="pitch-card">
+                    <div className="pitch-card-number">
+                      <h1>1</h1>
+                    </div>
+                    <div className="pitch-card-text">
+                      <h2>Design it</h2>
+                      <p>Use templates. Add photos, text, decorations.</p>
+                    </div>
+                  </div>
+                  <div className="pitch-card">
+                    <div className="pitch-card-number">
+                      <h1>2</h1>
+                    </div>
+                    <div className="pitch-card-text">
+                      <h2>Share your memories</h2>
+                      <p>Invite family and friends to view your album.</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="pitch-card-text">
-                  <h2>Design it</h2>
-                  <p>Use templates. Add photos, text, decorations.</p>
-                </div>
-              </div>
-              <div className="pitch-card">
-                <div className="pitch-card-number">
-                  <h1>2</h1>
-                </div>
-                <div className="pitch-card-text">
-                  <h2>Share your memories</h2>
-                  <p>Invite family and friends to view your album.</p>
-                </div>
+                <img src="mother.png" />
               </div>
             </div>
-            <img src="mother.png" />
           </div>
         </>
       )}
