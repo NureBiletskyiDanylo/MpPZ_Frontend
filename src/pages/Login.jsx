@@ -76,8 +76,14 @@ export default function Login() {
           <input name="email" type="email" placeholder="Email" value={signupData.email} onChange={handleSignupChange} />
           <input name="password" type="password" placeholder="Password" value={signupData.password} onChange={handleSignupChange} />
           <div className="button-group">
-            <button>Google</button>
-            <button>Facebook</button>
+            <button className="social-button">
+              <img src="/google.png" alt="Google" />
+              Google
+            </button>
+            <button className="social-button">
+              <img src="/facebook.png" alt="Google" />
+              Facebook
+            </button>
           </div>
           <button className="main-button" onClick={handleSignup}>Sign up</button>
         </div>
@@ -94,8 +100,14 @@ export default function Login() {
           <input name="email" type="email" placeholder="Email" value={loginData.email} onChange={handleLoginChange} />
           <input name="password" type="password" placeholder="Password" value={loginData.password} onChange={handleLoginChange} />
           <div className="button-group">
-            <button>Google</button>
-            <button>Facebook</button>
+            <button className="social-button">
+              <img src="/google.png" alt="Google" />
+              Google
+            </button>
+            <button className="social-button">
+              <img src="/facebook.png" alt="Google" />
+              Facebook
+            </button>
           </div>
           <button className="main-button" onClick={handleLogin}>Login</button>
         </div>

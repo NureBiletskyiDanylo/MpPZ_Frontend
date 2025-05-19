@@ -35,6 +35,11 @@
 }
 
 .form-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
   padding: 40px;
   height: 100%;
   box-shadow: 0 8px 8px -4px rgba(0, 0, 0, 0.2);
@@ -81,7 +86,6 @@
   /*FIXME: make inputs same width with the buttons*/
   width: 94%;
   padding: 10px;
-  margin-bottom: 15px;
   border: 2px solid #ede0d4;
   background: #b07d62;
   color: #f7f7f7;
@@ -91,8 +95,9 @@
 .button-group {
   display: flex;
   flex-direction: row;
+  width: 100%;
   gap: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .main-button {
@@ -127,4 +132,23 @@
 
 .button-group button:hover {
   background-color: #8a5a44;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+
+.social-button img {
+  width: 20px;
+  height: 20px;
 }
