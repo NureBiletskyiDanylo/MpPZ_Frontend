@@ -1,10 +1,6 @@
-html, body {
-  /*FIXME: this is a hack to ensure that bottom image actually sticks to the bottom*/
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-
-  background-color: #EDE0D4;
+html {
+  min-height: 100%;
+  background-color: #ede0d4;
 
   background-image:
     url("/bottom-image.png"),
@@ -25,4 +21,19 @@ html, body {
   background-attachment:
     scroll,
     scroll;
+}
+
+body {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
