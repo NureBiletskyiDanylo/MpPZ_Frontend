@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router';
+import { useNavigate } from "react-router";
 import { useAuth } from '../AuthContext';
+import { toast } from 'react-toastify';
 import '../assets/login.css';
 
 export default function Login() {
@@ -29,8 +31,12 @@ export default function Login() {
         body: JSON.stringify(signupData),
       });
       const data = await response.text();
-      console.log('Signup response:', data);
-      loginUser(data);
+      if (response.status != 200) {
+        toast.error(`Error: ${data}`);
+      } else {
+        console.log('Signup response:', data);
+        loginUser(data);
+      }
     } catch (err) {
       console.error('Signup error:', err);
     }
@@ -44,21 +50,28 @@ export default function Login() {
         body: JSON.stringify(loginData),
       });
       const data = await response.text();
-      console.log('Login response:', data);
-      loginUser(data);
+      if (response.status != 200) {
+        toast.error(`Error: ${data}`);
+      } else {
+        console.log('Login response:', data);
+        loginUser(data);
+      }
     } catch (err) {
       console.error('Login error:', err);
     }
   }
 
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const loginUser = (response) => {
     let userdata = JSON.parse(response);
     if (userdata.token) {
       login(userdata.token);
-      console.log("Hi " + userdata.username);
+      toast.success("Welcome, " + userdata.username);
+      navigate("/");
     } else {
+      toast.error("Server error.");
       console.error("No token in response! " + response);
     }
   }
