@@ -1,0 +1,147 @@
+.page-container {
+  background-color: #A9D6E5;
+  width: min(100vw, 1400px);
+  height: min(100vw, 1400px);
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.back-button {
+  display: flex;
+  background: none;
+  border: none;
+  color: #014F86;
+  font-size: 24px;
+  font-weight: 500;
+  cursor: pointer;
+  align-items: center;
+  padding: 12px;
+  gap: 10px;
+}
+
+.back-button img {
+  height: 27px;
+  width: 27px;
+}
+
+.back-button:hover {
+  font-size: 26px;
+}
+
+.content {
+  display: flex;
+  gap: 50px;
+  padding: 0px 80px 80px 80px;
+  height: 100%;
+  position: relative;
+}
+
+.image-section {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  display: flex;
+}
+
+.image-section .custum-file-upload {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.image-section .custum-file-upload input {
+  display: none;
+}
+
+.whale-image {
+  position: absolute;
+  left: -12%;
+  bottom: -30%;
+  width: 70%;
+  z-index: 2;
+}
+
+.page-container h3 {
+  font-size: 40px;
+  font-weight: 700;
+  color: #014F86;
+}
+
+.text-section {
+  position: absolute;
+  left: calc(50px + 50% + 50px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  flex-direction: row;
+  padding: 0px 80px 0px 20px;
+}
+
+.lined-textarea-wrapper {
+  position: relative;
+  width: 100%;
+  height: 600px; /* 12 lines * 60px */
+  margin-top: 20px;
+}
+
+.lined-textarea {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: #014F86;
+  font-size: 30px;
+  line-height: 60px;
+  border: none;
+  resize: none;
+  z-index: 2;
+  padding: 0;
+  outline: none;
+}
+
+.line-overlay {
+  position: absolute;
+  left: 0;
+  right: 120px; /* leave space for jellyfish */
+  height: 2px;
+  background-color: #014F86;
+  z-index: 1;
+}
+
+.jellyfish-image {
+  position: absolute;
+  right: 20px;
+  top: 45%;
+  width: 30%;
+  background-color: #A9D6E5;
+  z-index: 1;
+}
+
+.page-container .save-button {
+  border: solid 2px #014F86;
+  border-radius: 8px;
+  background-color: unset;
+  color: #014F86;
+  width: 180px;
+  height: 52px;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-container .save-button:hover {
+  background-color: #014F86;
+  color: #f7f7f7;
+}

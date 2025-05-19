@@ -1,0 +1,119 @@
+.album-profile {
+    display: flex;
+    padding: 75px 108px;
+    gap: 75px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.album-info-container {
+    display: flex;
+    background: linear-gradient(#B07D62, #8A5A44);
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 12px 12px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    height: fit-content;
+    min-height: 240px;
+    width: 50%;
+    min-width: 635px;
+}
+
+.album-info-container .image-placeholder img {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+.album-right {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.album-info h3, .page-card h3 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.album-info p, .page-card p {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.album-button {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+}
+
+.album-button .button, .page-card .button{
+    border: solid 2px #f7f7f7;
+    border-radius: 8px;
+    background-color: unset;
+    color: #f7f7f7;
+    width: 180px;
+    height: 45px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.album-button .button img, .page-card .button img {
+    height: 16px;
+    width: 16px;
+    margin-right: 8px;
+}
+
+.album-button .button:hover, .page-card .button:hover {
+    border: #9C6B52;
+    background-color: #9C6B52;
+}
+
+.page-list {
+    flex: 1;
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 85%;
+}
+
+.page-card {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(#B07D62, #8A5A44);
+    border-radius: 8px;
+    padding: 32px;
+    gap: 16px;
+    cursor: pointer;
+    width: 46%;
+}
+
+.page-card img {
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.page-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.page-card-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.page-card:hover {
+    background: #9C6B52;
+}

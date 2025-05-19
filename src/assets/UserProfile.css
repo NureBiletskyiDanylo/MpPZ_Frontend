@@ -1,0 +1,116 @@
+.user-profile {
+    display: flex;
+    padding: 100px 108px;
+    gap: 112px;
+    flex-wrap: wrap;
+}
+
+.user-info {
+    display: flex;
+    background: linear-gradient(#B07D62, #8A5A44);
+    border-radius: 8px;
+    padding: 20px 48px;
+    box-shadow: 12px 12px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    height: fit-content;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-info .image-placeholder {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+.profile-info h3 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.line {
+    position: relative;
+    height: 1px;
+    background-color: #EDE0D4;
+    min-width: 220px;
+    width: 100%;
+}
+
+.profile-info p {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.user-info .button{
+    border: solid 2px #f7f7f7;
+    border-radius: 8px;
+    background-color: unset;
+    color: #f7f7f7;
+    width: 220px;
+    height: 45px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.user-info .button img {
+    height: 16px;
+    width: 16px;
+    margin-right: 8px;
+}
+
+.user-info .button:hover {
+    border: #9C6B52;
+    background-color: #9C6B52;
+}
+
+.album-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
+.album-card {
+    display: flex;
+    background: linear-gradient(#B07D62, #8A5A44);
+    border-radius: 8px;
+    padding: 20px 32px;
+    gap: 32px;
+    cursor: pointer;
+}
+
+.album-card img {
+    height: 205px;
+    width: 205px;
+    border-radius: 4px;
+}
+
+.album-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.album-card h3 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.album-card p {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.album-card:hover {
+    background: #9C6B52;
+}
