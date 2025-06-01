@@ -1,11 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;400;500;600;700;800&display=swap');
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
 .page-container {
   background-color: #A9D6E5;
-  width: min(100vw, 1400px);
-  height: min(100vw, 1400px);
+  width: min(100vw, 1330px);
+  height: min(100vw, 1330px);
   position: relative;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+.waves-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  z-index: 1;
+}
+
+.waves-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 1;
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  z-index: 2;
 }
 
 .back-button {
@@ -19,6 +53,7 @@
   align-items: center;
   padding: 12px;
   gap: 10px;
+  z-index: 2;
 }
 
 .back-button img {
@@ -27,7 +62,23 @@
 }
 
 .back-button:hover {
-  font-size: 26px;
+  color: #2c7da0;
+}
+
+.date-input {
+  background: transparent;
+  border: none;
+  color: #014F86;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: right;
+  outline: none;
+  width: fit-content;
+  cursor: text;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  display: none;
 }
 
 .content {
@@ -36,6 +87,8 @@
   padding: 0px 80px 80px 80px;
   height: 100%;
   position: relative;
+  align-items: center;
+  z-index: 2;
 }
 
 .image-section {
@@ -61,31 +114,49 @@
 .whale-image {
   position: absolute;
   left: -12%;
-  bottom: -30%;
+  bottom: -25%;
   width: 70%;
   z-index: 2;
 }
 
-.page-container h3 {
-  font-size: 40px;
-  font-weight: 700;
-  color: #014F86;
+.jellyfish-image {
+  position: absolute;
+  right: -10%;
+  top: -15%;
+  width: 30%;
+  z-index: 1;
 }
 
 .text-section {
   position: absolute;
-  left: calc(50px + 50% + 50px);
+  left: calc(50% + 150px);
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 50px;
-  flex-direction: row;
   padding: 0px 80px 0px 20px;
+}
+
+.title-container {
+  width: 100%;
+  text-align: center;
+}
+
+.title-input {
+  background: transparent;
+  border: none;
+  font-size: 40px;
+  font-weight: 700;
+  color: #014F86;
+  width: 100%;
+  text-align: center;
+  outline: none;
+  padding: 0;
 }
 
 .lined-textarea-wrapper {
   position: relative;
   width: 100%;
-  height: 600px; /* 12 lines * 60px */
+  height: 480px;
   margin-top: 20px;
 }
 
@@ -99,27 +170,23 @@
   line-height: 60px;
   border: none;
   resize: none;
-  z-index: 2;
+  z-index: 3;
   padding: 0;
   outline: none;
+  left: 0;
+  top: -10%;
+  margin: 0;
 }
 
 .line-overlay {
   position: absolute;
   left: 0;
-  right: 120px; /* leave space for jellyfish */
+  right: 120px;
   height: 2px;
+  width: 100%;
   background-color: #014F86;
   z-index: 1;
-}
-
-.jellyfish-image {
-  position: absolute;
-  right: 20px;
-  top: 45%;
-  width: 30%;
-  background-color: #A9D6E5;
-  z-index: 1;
+  margin: 0;
 }
 
 .page-container .save-button {
@@ -139,6 +206,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .page-container .save-button:hover {

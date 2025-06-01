@@ -5,7 +5,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import UserProfile from './pages/UserProfile.jsx'
 import AlbumPage from './pages/AlbumPage.jsx'
-import CreatePage from './components/CreatePage.jsx'
+import CreatePageTemplate1 from './components/CreatePageTemplate1.jsx'
 import './App.css'
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path='/user-profile' element={<UserProfile />} />
         <Route path='/album' element={<AlbumPage />} />
-        <Route path='/create-page' element={<CreatePage />} />
+        <Route path='/create-page/1' element={<CreatePageTemplate1 />} />
       </Routes>
       <ToastContainer />
     </AuthProvider>
