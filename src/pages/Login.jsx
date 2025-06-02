@@ -68,7 +68,7 @@ export default function Login() {
   const loginUser = (response) => {
     let userdata = JSON.parse(response);
     if (userdata.token) {
-      login(userdata.token, userdata.username);
+      login(userdata.token, userdata.username, userdata.id);
       toast.success("Welcome, " + userdata.username);
       navigate("/");
     } else {
