@@ -1,51 +1,99 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Navigate } from 'react-router';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 import LoggedHeader from '../components/LoggedHeader.jsx';
 import UserInfo from '../components/UserInfo.jsx';
 import EditProfileForm from '../components/EditProfileForm.jsx';
 import CreateAlbumForm from '../components/CreateAlbumForm.jsx';
 import AlbumCard from '../components/AlbumCard.jsx';
 import '../assets/UserProfile.css';
-import { useAuth } from '../AuthContext.jsx';
+import { isEmail, useAuth } from '../AuthContext.jsx';
 
 function UserProfile() {
   const [showEditForm, setShowEditForm] = useState(false);
   const [showAlbumForm, setShowAlbumForm] = useState(false);
-  const [albums, setAlbums] = useState([]);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const [albums, setAlbums] = useState([]);
+  const { user, isLoading, setUserData } = useAuth();
 
   const API_URL = import.meta.env.VITE_API_URL;
   //TODO: move albums to some context of sorts?
   useEffect(() => {
-    if (user?.token) {
-      fetch(`${API_URL}/api/Album/my-albums`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${user.token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(res => res.json())
-        .then(data => setAlbums(data))
-        .catch(err => {
-          console.error('Failed to fetch albums:', err);
-          setAlbums([]); // fallback
-        });
+    if (isLoading) return;
+    if (!user) {
+      navigate("/login");
+      return;
     }
-  }, [user?.token]);
+
+    fetch(`${API_URL}/api/Album/my-albums`, {
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+      }
+    })
+      .then(res => res.json())
+      .then(data => setAlbums(data))
+      .catch(err => {
+        console.error('Failed to fetch albums:', err);
+      });
+  }, [user, isLoading]);
 
   const handleEditProfile = async (formData) => {
+    if (!isEmail(formData.email)) {
+      toast.error(`Invalid email: ${formData.email}`);
+      return;
+    }
+    if (!formData.username) {
+      toast.error('Username must not be empty');
+      return;
+    }
+
+    await fetch(`${API_URL}/api/Account/${user.id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      //NOTE: this endpoint returns nothing on success
+      .then(res => {
+        console.log(res);
+        if (res.ok) {
+          toast.success('Profile updated');
+          //XXX: we have to set new user data directly, as we don't receive the
+          // new data from backend
+          setUserData(user.id, user.token, formData.username, formData.email);
+        } else {
+          console.error('Update error ' + res.status);
+        }
+      })
+      .catch(err => {
+        console.error('Failed to update user profile:', err);
+      });
     setShowEditForm(false);
   };
 
   const handleCreateAlbum = async (formData) => {
+    fetch(`${API_URL}/api/Album`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setAlbums(data);  //TODO: update albums
+      })
+      .catch(err => {
+        console.error('Failed to post album:', err);
+      });
     setShowAlbumForm(false);
   };
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
+  if (!user) return null;
 
   return (
     <>
@@ -70,7 +118,7 @@ function UserProfile() {
       </div>
 
       {showEditForm && (
-        <EditProfileForm onCancel={() => setShowEditForm(false)} onSave={handleEditProfile} />
+        <EditProfileForm onCancel={() => setShowEditForm(false)} onSave={handleEditProfile} user={user} />
       )}
       {showAlbumForm && (
         <CreateAlbumForm onCancel={() => setShowAlbumForm(false)} onSave={handleCreateAlbum} />
