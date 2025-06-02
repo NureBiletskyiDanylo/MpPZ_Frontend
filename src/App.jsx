@@ -16,7 +16,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/' element={<Home />} />
         <Route path='/user-profile' element={<UserProfile />} />
-        <Route path='/album' element={<AlbumPage />} />
+        <Route path='/album/:albumId' element={<AlbumPage />} />
         <Route path='/create/1' element={<CreatePageTemplate1 />} />
         <Route path='/create/2' element={<CreatePageTemplate2 />} />
         <Route path="/pages/:pageId/edit" element={<PageEditWrapper />} />
@@ -32,8 +32,8 @@ function PageEditWrapper() {
   // Тут має бути логіка завантаження даних сторінки
   // Наприклад:
   const pageData = fetchPageData(pageId); // Ваша функція отримання даних
-  
-  switch(pageData.templateId) {
+
+  switch (pageData.templateId) {
     case 1: return <CreatePageTemplate1 mode="edit" pageData={pageData} />;
     case 2: return <CreatePageTemplate2 mode="edit" pageData={pageData} />;
     case 3: return <CreatePageTemplate3 mode="edit" pageData={pageData} />;
@@ -45,10 +45,10 @@ function PageViewWrapper() {
   const { pageId } = useParams();
   // Аналогічно, завантаження даних сторінки
   const pageData = fetchPageData(pageId);
-  
+
   if (!pageData) return <div>Loading...</div>;
-  
-  switch(pageData.templateId) {
+
+  switch (pageData.templateId) {
     case 1: return <CreatePageTemplate1 mode="view" pageData={pageData} />;
     case 2: return <CreatePageTemplate2 mode="view" pageData={pageData} />;
     case 3: return <CreatePageTemplate3 mode="view" pageData={pageData} />;

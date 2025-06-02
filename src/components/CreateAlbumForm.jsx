@@ -2,10 +2,14 @@ import uploadImage from '/upload-image.png'
 import '../assets/UserProfileForm.css'
 import { React, useState } from 'react'
 
-function CreateAlbumForm({ onCancel, onSave, user }) {
-  const [title, setTitle] = useState('');
-  const [childDOB, setChildDOB] = useState('');
-  const [createdAt, setCreatedAt] = useState('');
+function CreateAlbumForm({ onCancel, onSave, user, defaultAlbum = {} }) {
+  const [title, setTitle] = useState(defaultAlbum.title || '');
+  const [childDOB, setChildDOB] = useState(defaultAlbum.childDateOfBirth || '');
+  const [createdAt, setCreatedAt] = useState(
+    defaultAlbum.createdAt
+      ? new Date(defaultAlbum.createdAt).toISOString().slice(0, 16)
+      : ''
+  );
 
   const handleSubmit = () => {
     const albumData = {
