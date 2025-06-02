@@ -7,7 +7,7 @@ import back from '/green-back.png'
 import vine from '/vine.png'
 import '../assets/CreatePageTemplate2.css'
 
-function CreatePageTemplate2({ pageId }) {
+function CreatePageTemplate2({ mode = 'create', pageData: initialData }) {
   const [image, setImage] = useState(null);
   const [text, setText] = useState('');
   const [pageData, setPageData] = useState({
@@ -16,7 +16,7 @@ function CreatePageTemplate2({ pageId }) {
     date: new Date().toISOString().split('T')[0],
     title: 'First trip to the zoo'
   });
-  const { mode = 'create', templateId } = useParams();
+  const { pageId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function CreatePageTemplate2({ pageId }) {
       };
       setPageData(mockData);
     }
-  }, [mode, templateId, pageId]);
+  }, [mode, pageId]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -87,7 +87,7 @@ function CreatePageTemplate2({ pageId }) {
         <div className="content">
             <div className="text-section">
                 <div className='title-container'>
-                <input 
+                <textarea 
                     type="text" 
                     className="title-input" 
                     value={pageData.title} 
@@ -108,7 +108,7 @@ function CreatePageTemplate2({ pageId }) {
                     <input id="file" type="file" onChange={handleFileChange} disabled={mode === 'view'}/>
                 </label>
                 ) : (
-                <div className="custum-file-upload" style={{ backgroundImage: `url(${pageData.image})` }} />
+                <div className="custum-file-upload" style={{ backgroundImage: pageData.image ? `url(${pageData.image})` : `url(${pageImage})` }} />
                 )}            
                 <img src={vine} alt='Vine' className='vine-image' />
                 <img src={parrot} alt='Parrot' className='parrot-image' />
