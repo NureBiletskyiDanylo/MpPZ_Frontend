@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;400;500;600;700;800&display=swap');
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.page-container3 {
+  background-color: #E8DAC1;
+  width: min(100vw, 1330px);
+  height: min(100vw, 1330px);
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.page-container3 .top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  z-index: 2;
+}
+
+.page-container3 .back-button {
+  display: flex;
+  background: none;
+  border: none;
+  color: #3B2600;
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  cursor: pointer;
+  align-items: center;
+  padding: 12px;
+  gap: 10px;
+  z-index: 2;
+}
+
+.page-container3 .back-button img {
+  height: 27px;
+  width: 27px;
+}
+
+.page-container3 .back-button:hover {
+  color: #513400;
+}
+
+.page-container3 .date-input {
+  background: transparent;
+  border: none;
+  color: #3B2600;
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: right;
+  outline: none;
+  width: fit-content;
+  cursor: text;
+}
+
+.page-container3 .date-input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.page-container3 .content {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 20px;
+  padding: 0px 40px 80px 40px;
+  height: 100%;
+  z-index: 2;
+}
+
+.top-left {
+    grid-column: span 5 / span 5;
+    grid-row: span 4 / span 4;
+    grid-column-start: 1;
+    grid-row-start: 1;
+}
+
+.top-left .custum-file-upload {
+  display: flex;
+  width: 95%;
+  height: 90%;
+  border-radius: 4px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-container3 .text-section {
+  grid-column: span 4 / span 4;
+  grid-row: span 3 / span 3;
+  grid-row-start: 1;
+  grid-column-start: 6;
+  display: flex;
+  position: unset;
+  height: 100%;
+  width: calc(100% - 40px);
+  justify-content: center;
+  align-items: center;
+}
+
+.page-container3 .title-container {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  height: 75%;
+  border-radius: 20px;
+  background-color: #DECAA6;
+}
+
+.page-container3 .title-input {
+  background: transparent;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: #3B2600;
+  width: 100%;
+  text-align: center;
+  outline: none;
+  padding: 0;
+  margin: 24px;
+  resize: none;
+}
+
+.bottom-left {
+  grid-column: span 5 / span 5;
+  grid-row: span 6 / span 6;
+  grid-row-start: 5;
+  grid-column-start: 1;
+}
+
+.bottom-left .custum-file-upload {
+  width: 95%;
+  height: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+}
+
+.bottom-right {
+  grid-column: span 4 / span 4;
+  grid-row: span 7 / span 7;
+  grid-column-start: 6;
+  grid-row-start: 4;
+}
+
+.bottom-right .custum-file-upload {
+  width: 100%;
+  height: 90%;
+  border-radius: 4px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-container3 .image-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: unset;
+}
+
+.page-container3 .image-section .custum-file-upload2,
+.page-container3 .image-section .custum-file-upload3 {
+  width: 100%;
+  height: 50%;
+  border-radius: 4px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-container3 .image-section .custum-file-upload1 input,
+.page-container3 .image-section .custum-file-upload2 input,
+.page-container3 .image-section .custum-file-upload3 input {
+  display: none;
+}
+
+.page-container3 .save-button {
+  border: solid 2px #3B2600;
+  border-radius: 8px;
+  background-color: unset;
+  color: #3B2600;
+  width: 180px;
+  height: 52px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.page-container3 .save-button:hover {
+  background-color: #3B2600;
+  color: #f7f7f7;
+}

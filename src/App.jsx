@@ -7,6 +7,7 @@ import UserProfile from './pages/UserProfile.jsx'
 import AlbumPage from './pages/AlbumPage.jsx'
 import CreatePageTemplate1 from './components/CreatePageTemplate1.jsx'
 import CreatePageTemplate2 from './components/CreatePageTemplate2.jsx'
+import CreatePageTemplate3 from './components/CreatePageTemplate3.jsx'
 import './App.css'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/album' element={<AlbumPage />} />
         <Route path='/create/1' element={<CreatePageTemplate1 />} />
         <Route path='/create/2' element={<CreatePageTemplate2 />} />
+        <Route path='/create/3' element={<CreatePageTemplate3 />} />
         <Route path="/pages/:pageId/edit" element={<PageEditWrapper />} />
         <Route path="/pages/:pageId" element={<PageViewWrapper />} />
       </Routes>
