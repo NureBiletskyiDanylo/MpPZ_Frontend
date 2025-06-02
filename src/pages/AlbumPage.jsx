@@ -4,14 +4,15 @@ import LoggedHeader from '../components/LoggedHeader.jsx'
 import AlbumInfo from '../components/AlbumInfo.jsx'
 import PageCard from '../components/PageCard.jsx'
 import CreateAlbumForm from '../components/CreateAlbumForm.jsx'
+import TemplateForm from '../components/TemplateForm.jsx';
 import '../assets/AlbumPage.css'
-import search from '/search.png'
 import sort from '/sort.png'
 
 function AlbumPage() {
   const [showAlbumForm, setShowAlbumForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('new-to-old');
+  const [showTemplateForm, setShowTemplateForm] = useState(false);
   const navigate = useNavigate();
 
   const [pages, setPages] = useState([
@@ -40,7 +41,7 @@ function AlbumPage() {
       <div className='album-profile'>
         <AlbumInfo
           onEditAlbum={() => setShowAlbumForm(true)}
-          onCreatePage={() => navigate('/create-page/1')}
+          onCreatePage={() => setShowTemplateForm(true)}
         />
 
         <div className='search-container'>
@@ -65,6 +66,7 @@ function AlbumPage() {
             <PageCard 
               key={page.id}
               pageId={page.id}
+              templateId={page.templateId}
               onClick={() => navigate(`/page/${page.id}`)}
             >
               <div className='page-info'>
@@ -76,6 +78,7 @@ function AlbumPage() {
         </div>
       </div>
       {showAlbumForm && (<CreateAlbumForm onCancel={() => setShowAlbumForm(false)} onSave={handleEditAlbum} />)}
+      {showTemplateForm && <TemplateForm onClose={() => setShowTemplateForm(false)} />}
     </>
   )
 }

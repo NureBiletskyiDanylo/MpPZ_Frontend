@@ -8,33 +8,26 @@
   box-sizing: border-box;
 }
 
-.page-container {
-  background-color: #A9D6E5;
+.page-container2 {
+  background-color: #BEE0B7;
   width: min(100vw, 1330px);
   height: min(100vw, 1330px);
   position: relative;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-.waves-left {
+.giraffe {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
-  width: 40%;
+  width: 30%;
   z-index: 1;
 }
 
-.waves-right {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  z-index: 1;
-}
-
-.top-section {
+.page-container2 .top-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,11 +35,11 @@
   z-index: 2;
 }
 
-.back-button {
+.page-container2 .back-button {
   display: flex;
   background: none;
   border: none;
-  color: #014F86;
+  color: #178D00;
   font-family: 'Roboto', sans-serif;
   font-size: 24px;
   font-weight: 500;
@@ -57,19 +50,19 @@
   z-index: 2;
 }
 
-.back-button img {
+.page-container2 .back-button img {
   height: 27px;
   width: 27px;
 }
 
-.back-button:hover {
-  color: #2c7da0;
+.page-container2 .back-button:hover {
+  color: #38b000;
 }
 
-.date-input {
+.page-container2 .date-input {
   background: transparent;
   border: none;
-  color: #014F86;
+  color: #178D00;
   font-family: 'Roboto', sans-serif;
   font-size: 24px;
   font-weight: 500;
@@ -79,11 +72,11 @@
   cursor: text;
 }
 
-.date-input::-webkit-calendar-picker-indicator {
+.page-container2 .date-input::-webkit-calendar-picker-indicator {
   display: none;
 }
 
-.content {
+.page-container2 .content {
   display: flex;
   gap: 50px;
   padding: 0px 80px 80px 80px;
@@ -93,82 +86,47 @@
   z-index: 2;
 }
 
-.image-section {
-  width: 50%;
-  height: 50%;
-  position: absolute;
-  display: flex;
-}
-
-.image-section .custum-file-upload {
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-  cursor: pointer;
-  background-size: cover;
-  background-position: center;
-}
-
-.image-section .custum-file-upload input {
-  display: none;
-}
-
-.whale-image {
-  position: absolute;
-  left: -12%;
-  bottom: -25%;
-  width: 70%;
-  z-index: 2;
-}
-
-.jellyfish-image {
-  position: absolute;
-  right: -10%;
-  top: -15%;
-  width: 30%;
-  z-index: 1;
-}
-
-.text-section {
-  position: absolute;
-  left: calc(50% + 150px);
+.page-container2 .text-section {
   display: flex;
   flex-direction: column;
+  position: unset;
+  height: 100%;
+  margin-top: 20%;
   gap: 50px;
   padding: 0px 80px 0px 20px;
 }
 
-.title-container {
+.page-container2 .title-container {
   width: 100%;
   text-align: center;
 }
 
-.title-input {
+.page-container2 .title-input {
   background: transparent;
   border: none;
   font-family: 'Roboto', sans-serif;
   font-size: 40px;
   font-weight: 700;
-  color: #014F86;
+  color: #178D00;
   width: 100%;
   text-align: center;
   outline: none;
   padding: 0;
 }
 
-.lined-textarea-wrapper {
+.page-container2 .lined-textarea-wrapper {
   position: relative;
   width: 100%;
   height: 480px;
   margin-top: 20px;
 }
 
-.lined-textarea {
+.page-container2 .lined-textarea {
   position: absolute;
   width: 100%;
   height: 100%;
   background: transparent;
-  color: #014F86;
+  color: #178D00;
   font-size: 30px;
   line-height: 60px;
   border: none;
@@ -181,22 +139,59 @@
   margin: 0;
 }
 
-.line-overlay {
+.page-container2 .line-overlay {
   position: absolute;
   left: 0;
   right: 120px;
   height: 2px;
   width: 100%;
-  background-color: #014F86;
+  background-color: #178D00;
   z-index: 1;
   margin: 0;
 }
 
-.page-container .save-button {
-  border: solid 2px #014F86;
+.page-container2 .image-section {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  position: unset;
+  margin-top: 35%;
+}
+
+.page-container2 .image-section .custum-file-upload {
+  width: 100%;
+  height: 50%;
+  border-radius: 4px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-container2 .image-section .custum-file-upload input {
+  display: none;
+}
+
+.vine-image {
+  position: absolute;
+  left: 51%;
+  bottom: 8.8%;
+  width: 27%;
+  z-index: 2;
+}
+
+.parrot-image {
+  position: absolute;
+  right: 6%;
+  top: 0.5%;
+  width: 19%;
+  z-index: 1;
+}
+
+.page-container2 .save-button {
+  border: solid 2px #178D00;
   border-radius: 8px;
   background-color: unset;
-  color: #014F86;
+  color: #178D00;
   width: 180px;
   height: 52px;
   font-family: 'Roboto', sans-serif;
@@ -213,7 +208,7 @@
   z-index: 2;
 }
 
-.page-container .save-button:hover {
-  background-color: #014F86;
+.page-container2 .save-button:hover {
+  background-color: #178D00;
   color: #f7f7f7;
 }

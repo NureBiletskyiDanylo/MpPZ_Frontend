@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams  } from 'react-router'
 import pageImage from '/album-img.png' 
-import jellyfish from '/jellyfish.png'
-import whale from '/whale.png'
-import back from '/blue-back.png'
-import wavesLeft from '/waves-left.png'
-import wavesRight from '/waves-right.png'
-import '../assets/CreatePageTemplate1.css'
+import parrot from '/parrot.png'
+import giraffe from '/giraffe.png'
+import back from '/green-back.png'
+import vine from '/vine.png'
+import '../assets/CreatePageTemplate2.css'
 
-function CreatePageTemplate1({ pageId }) {
+function CreatePageTemplate2({ pageId }) {
   const [image, setImage] = useState(null);
   const [text, setText] = useState('');
   const [pageData, setPageData] = useState({
     image: null,
     text: '',
     date: new Date().toISOString().split('T')[0],
-    title: 'First trip to the sea'
+    title: 'First trip to the zoo'
   });
   const { mode = 'create', templateId } = useParams();
   const navigate = useNavigate();
@@ -28,9 +27,9 @@ function CreatePageTemplate1({ pageId }) {
       // Тимчасові дані для прикладу:
       const mockData = {
         image: '/mother.jpg',
-        text: 'Our amazing trip to the sea...',
+        text: 'Our amazing trip to the zoo...',
         date: '11/08/2024',
-        title: 'First trip to the sea'
+        title: 'First trip to the zoo'
       };
       setPageData(mockData);
     }
@@ -68,9 +67,8 @@ function CreatePageTemplate1({ pageId }) {
 
   return (
     <div className='page-wrapper'>
-      <div className="page-container">
-        <img src={wavesLeft} alt='Waves Left' className='waves-left' />
-        <img src={wavesRight} alt='Waves Right' className='waves-right' />
+      <div className="page-container2">
+        <img src={giraffe} alt='Giraffe' className='giraffe' />
 
         <div className='top-section'>
           <button className="back-button" onClick={handleBackClick}>
@@ -87,34 +85,34 @@ function CreatePageTemplate1({ pageId }) {
         </div>
 
         <div className="content">
-          <div className="image-section">
-            {mode !== 'view' ? (
-              <label htmlFor="file" className="custum-file-upload" style={{ backgroundImage: pageData.image ? `url(${pageData.image})` : `url(${pageImage})`}}>
-                <input id="file" type="file" onChange={handleFileChange} disabled={mode === 'view'}/>
-              </label>
-            ) : (
-              <div className="custum-file-upload" style={{ backgroundImage: `url(${pageData.image})` }} />
-            )}            
-            <img src={whale} alt='Whale' className='whale-image' />
-            <img src={jellyfish} alt='Jellyfish' className='jellyfish-image' />
-          </div>
-          <div className="text-section">
-            <div className='title-container'>
-              <input 
-                type="text" 
-                className="title-input" 
-                value={pageData.title} 
-                onChange={handleTitleChange}
-                readOnly={mode === 'view'}
-              />
+            <div className="text-section">
+                <div className='title-container'>
+                <input 
+                    type="text" 
+                    className="title-input" 
+                    value={pageData.title} 
+                    onChange={handleTitleChange}
+                    readOnly={mode === 'view'}
+                />
+                </div>
+                <div className="lined-textarea-wrapper">
+                <textarea className='lined-textarea' value={pageData.text} onChange={handleTextChange} rows={8} readOnly={mode === 'view'} />
+                {[...Array(8)].map((_, i) => (
+                    <div key={i} className='line-overlay' style={{ top: `${i * 60}px` }} />
+                ))}
+                </div>
             </div>
-            <div className="lined-textarea-wrapper">
-              <textarea className='lined-textarea' value={pageData.text} onChange={handleTextChange} rows={8} readOnly={mode === 'view'} />
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className='line-overlay' style={{ top: `${i * 60}px` }} />
-              ))}
+            <div className="image-section">
+                {mode !== 'view' ? (
+                <label htmlFor="file" className="custum-file-upload" style={{ backgroundImage: pageData.image ? `url(${pageData.image})` : `url(${pageImage})`}}>
+                    <input id="file" type="file" onChange={handleFileChange} disabled={mode === 'view'}/>
+                </label>
+                ) : (
+                <div className="custum-file-upload" style={{ backgroundImage: `url(${pageData.image})` }} />
+                )}            
+                <img src={vine} alt='Vine' className='vine-image' />
+                <img src={parrot} alt='Parrot' className='parrot-image' />
             </div>
-          </div>
         </div>
         {mode !== 'view' && (
           <button className="save-button" onClick={handleSave}>Save page</button>
@@ -124,4 +122,4 @@ function CreatePageTemplate1({ pageId }) {
   );
 }
 
-export default CreatePageTemplate1
+export default CreatePageTemplate2

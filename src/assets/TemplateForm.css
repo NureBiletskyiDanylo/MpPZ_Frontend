@@ -1,0 +1,87 @@
+/* TemplateModal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #EDE0D4;
+    border-radius: 8px;
+    width: fit-content;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.modal-title {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    padding-right: 40px;
+    color: #8A5A44;
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.modal-header .back-button {
+    display: flex;
+    background: none;
+    border: none;
+    color: #8A5A44;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+    z-index: 2;
+}
+
+.modal-header .back-button:hover {
+    color: #9C674F;
+}
+
+.back-image {
+    width: 27px;
+    height: 27px;
+}
+
+.templates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.template-card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+}
+
+.template-card img {
+    width: 429px;
+    height: 429px;
+    object-fit: cover;
+}

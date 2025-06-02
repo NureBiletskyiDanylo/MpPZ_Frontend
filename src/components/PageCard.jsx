@@ -7,7 +7,7 @@ function PageCard({children, onClick, pageId}) {
 
     const handleEditClick = (e) => {
         e.stopPropagation()
-        navigate(`/edit-page/${pageId}`)
+        navigate(`/page/${pageId}/edit`)
     }
 
     return(
