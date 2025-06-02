@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useParams  } from 'react-router'
-import pageImage from '/album-img.png' 
+import { useNavigate, useParams } from 'react-router'
+import pageImage from '/album-img.png'
 import parrot from '/parrot.png'
 import giraffe from '/giraffe.png'
 import back from '/green-back.png'
@@ -8,6 +8,7 @@ import vine from '/vine.png'
 import '../assets/CreatePageTemplate2.css'
 
 function CreatePageTemplate2({ mode = 'create', pageData: initialData }) {
+  const { albumId } = location.state || {};
   const [image, setImage] = useState(null);
   const [text, setText] = useState('');
   const [pageData, setPageData] = useState({
@@ -23,7 +24,7 @@ function CreatePageTemplate2({ mode = 'create', pageData: initialData }) {
     if (mode === 'edit' || mode === 'view') {
       // Тут має бути запит до API для отримання даних сторінки за id
       // Приклад:
-      
+
       // Тимчасові дані для прикладу:
       const mockData = {
         image: '/mother.jpg',
@@ -38,20 +39,20 @@ function CreatePageTemplate2({ mode = 'create', pageData: initialData }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setPageData(prev => ({...prev, image: URL.createObjectURL(file)}));
+      setPageData(prev => ({ ...prev, image: URL.createObjectURL(file) }));
     }
   };
 
   const handleTextChange = (e) => {
-    setPageData(prev => ({...prev, text: e.target.value}));
+    setPageData(prev => ({ ...prev, text: e.target.value }));
   };
 
   const handleDateChange = (e) => {
-    setPageData(prev => ({...prev, date: e.target.value}));
+    setPageData(prev => ({ ...prev, date: e.target.value }));
   };
 
   const handleTitleChange = (e) => {
-    setPageData(prev => ({...prev, title: e.target.value}));
+    setPageData(prev => ({ ...prev, title: e.target.value }));
   };
 
   const handleBackClick = () => {
@@ -75,44 +76,44 @@ function CreatePageTemplate2({ mode = 'create', pageData: initialData }) {
             <img src={back} alt='Back' className='back-image' />
             Back
           </button>
-          <input 
-            type="date" 
-            className="date-input" 
-            value={pageData.date} 
-            onChange={handleDateChange} 
+          <input
+            type="date"
+            className="date-input"
+            value={pageData.date}
+            onChange={handleDateChange}
             readOnly={mode === 'view'}
           />
         </div>
 
         <div className="content">
-            <div className="text-section">
-                <div className='title-container'>
-                <textarea 
-                    type="text" 
-                    className="title-input" 
-                    value={pageData.title} 
-                    onChange={handleTitleChange}
-                    readOnly={mode === 'view'}
-                />
-                </div>
-                <div className="lined-textarea-wrapper">
-                <textarea className='lined-textarea' value={pageData.text} onChange={handleTextChange} rows={8} readOnly={mode === 'view'} />
-                {[...Array(8)].map((_, i) => (
-                    <div key={i} className='line-overlay' style={{ top: `${i * 60}px` }} />
-                ))}
-                </div>
+          <div className="text-section">
+            <div className='title-container'>
+              <textarea
+                type="text"
+                className="title-input"
+                value={pageData.title}
+                onChange={handleTitleChange}
+                readOnly={mode === 'view'}
+              />
             </div>
-            <div className="image-section">
-                {mode !== 'view' ? (
-                <label htmlFor="file" className="custum-file-upload" style={{ backgroundImage: pageData.image ? `url(${pageData.image})` : `url(${pageImage})`}}>
-                    <input id="file" type="file" onChange={handleFileChange} disabled={mode === 'view'}/>
-                </label>
-                ) : (
-                <div className="custum-file-upload" style={{ backgroundImage: pageData.image ? `url(${pageData.image})` : `url(${pageImage})` }} />
-                )}            
-                <img src={vine} alt='Vine' className='vine-image' />
-                <img src={parrot} alt='Parrot' className='parrot-image' />
+            <div className="lined-textarea-wrapper">
+              <textarea className='lined-textarea' value={pageData.text} onChange={handleTextChange} rows={8} readOnly={mode === 'view'} />
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className='line-overlay' style={{ top: `${i * 60}px` }} />
+              ))}
             </div>
+          </div>
+          <div className="image-section">
+            {mode !== 'view' ? (
+              <label htmlFor="file" className="custum-file-upload" style={{ backgroundImage: pageData.image ? `url(${pageData.image})` : `url(${pageImage})` }}>
+                <input id="file" type="file" onChange={handleFileChange} disabled={mode === 'view'} />
+              </label>
+            ) : (
+              <div className="custum-file-upload" style={{ backgroundImage: pageData.image ? `url(${pageData.image})` : `url(${pageImage})` }} />
+            )}
+            <img src={vine} alt='Vine' className='vine-image' />
+            <img src={parrot} alt='Parrot' className='parrot-image' />
+          </div>
         </div>
         {mode !== 'view' && (
           <button className="save-button" onClick={handleSave}>Save page</button>
