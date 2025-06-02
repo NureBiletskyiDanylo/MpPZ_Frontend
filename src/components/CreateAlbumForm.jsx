@@ -1,7 +1,22 @@
 import uploadImage from '/upload-image.png'
 import '../assets/UserProfileForm.css'
+import { React, useState } from 'react'
 
-function CreateAlbumForm({ onCancel, onSave }) {
+function CreateAlbumForm({ onCancel, onSave, user }) {
+  const [title, setTitle] = useState('');
+  const [childDOB, setChildDOB] = useState('');
+  const [createdAt, setCreatedAt] = useState('');
+
+  const handleSubmit = () => {
+    const albumData = {
+      title,
+      childDateOfBirth: childDOB,
+      createdAt: new Date(createdAt).toISOString(),
+      ownerId: user.id,
+    };
+    onSave(albumData);
+  };
+
   return (
     <div className='modal'>
       <div className='form-container'>
@@ -14,23 +29,49 @@ function CreateAlbumForm({ onCancel, onSave }) {
           </div>
           <input id="file" type="file" />
         </label>
+
         <div className='form-left'>
           <div className='field-wrapper'>
-            <input className='input-field' type='text' placeholder='' id='title' />
+            <input
+              className='input-field'
+              type='text'
+              id='title'
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
             <label htmlFor='title' className='label-text'>Title</label>
           </div>
+
           <div className='field-wrapper'>
-            <input className='input-field' type='date' placeholder='' id='createdAt' />
-            <label htmlFor='date' className='label-text'>Date</label>
+            <input
+              className='input-field'
+              type='date'
+              id='childDOB'
+              value={childDOB}
+              onChange={(e) => setChildDOB(e.target.value)}
+            />
+            <label htmlFor='childDOB' className='label-text'>Child's Date of Birth</label>
           </div>
+
+          <div className='field-wrapper'>
+            <input
+              className='input-field'
+              type='datetime-local'
+              id='createdAt'
+              value={createdAt}
+              onChange={(e) => setCreatedAt(e.target.value)}
+            />
+            <label htmlFor='createdAt' className='label-text'>Created At</label>
+          </div>
+
           <div className='actions'>
             <button className='cancel-button' onClick={onCancel}>Cancel</button>
-            <button className='save-button' onClick={onSave}>Save</button>
+            <button className='save-button' onClick={handleSubmit}>Save</button>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CreateAlbumForm
+export default CreateAlbumForm;

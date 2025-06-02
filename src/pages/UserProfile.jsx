@@ -17,17 +17,11 @@ function UserProfile() {
   const { user, isLoading, setUserData } = useAuth();
 
   const API_URL = import.meta.env.VITE_API_URL;
-  //TODO: move albums to some context of sorts?
-  useEffect(() => {
-    if (isLoading) return;
-    if (!user) {
-      navigate("/login");
-      return;
-    }
 
+  const fetchAlbums = async (token) => {
     fetch(`${API_URL}/api/Album/my-albums`, {
       headers: {
-        'Authorization': `Bearer ${user.token}`,
+        'Authorization': `Bearer ${token}`,
       }
     })
       .then(res => res.json())
@@ -35,6 +29,15 @@ function UserProfile() {
       .catch(err => {
         console.error('Failed to fetch albums:', err);
       });
+  }
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    fetchAlbums(user.token);
   }, [user, isLoading]);
 
   const handleEditProfile = async (formData) => {
@@ -82,10 +85,17 @@ function UserProfile() {
       },
       body: JSON.stringify(formData)
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        setAlbums(data);  //TODO: update albums
+      .then(res => {
+        console.log(res);
+        if (res.ok) {
+          //NOTE: the endpoint doesn't return anything,
+          // so we have to re-fetch albums
+          toast.success('Album posted');
+          fetchAlbums(user.token);
+        } else {
+          console.error('Error posting album: ' + res.status);
+          toast.error('Error posting album');
+        }
       })
       .catch(err => {
         console.error('Failed to post album:', err);
@@ -121,7 +131,7 @@ function UserProfile() {
         <EditProfileForm onCancel={() => setShowEditForm(false)} onSave={handleEditProfile} user={user} />
       )}
       {showAlbumForm && (
-        <CreateAlbumForm onCancel={() => setShowAlbumForm(false)} onSave={handleCreateAlbum} />
+        <CreateAlbumForm onCancel={() => setShowAlbumForm(false)} onSave={handleCreateAlbum} user={user} />
       )}
     </>
   );

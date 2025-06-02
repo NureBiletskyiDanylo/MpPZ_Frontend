@@ -31,7 +31,10 @@ export function AuthProvider({ children }) {
           setUser(null);
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -41,8 +44,9 @@ export function AuthProvider({ children }) {
 
     if (token && username && id) {
       setUserWithEmail(id, token, username);
+    } else {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, []);
 
   const login = (token, username, id) => {
