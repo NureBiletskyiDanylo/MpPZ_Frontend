@@ -1,7 +1,6 @@
 import uploadImage from '/upload-image.png'
 import '../assets/UserProfileForm.css'
 import { React, useEffect, useState } from 'react'
-import { toast } from 'react-toastify';
 
 function CreateAlbumForm({ onCancel, onSave, user, defaultAlbum = {} }) {
   const [file, setFile] = useState(null);

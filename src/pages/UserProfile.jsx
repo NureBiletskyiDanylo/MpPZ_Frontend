@@ -41,7 +41,7 @@ function UserProfile() {
     fetchAlbums(user.token);
   }, [user, isLoading]);
 
-  const handleEditProfile = async (formData) => {
+  const handleEditProfile = async (formData, imageFile) => {
     if (!isEmail(formData.email)) {
       toast.error(`Invalid email: ${formData.email}`);
       return;
@@ -51,7 +51,7 @@ function UserProfile() {
       return;
     }
 
-    await fetch(`${API_URL}/api/Account/${user.id}`, {
+    fetch(`${API_URL}/api/Account/${user.id}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${user.token}`,
@@ -74,6 +74,25 @@ function UserProfile() {
       .catch(err => {
         console.error('Failed to update user profile:', err);
       });
+
+    if (imageFile) {
+      const formToSend = new FormData();
+      formToSend.append('NewImage', imageFile);
+      fetch(`${API_URL}/api/Account/update-profile`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+        },
+        body: formToSend
+      })
+        .then(res => {
+          console.log(res);
+          if (!res.ok) {
+            toast.error('Failed to set new image!');
+          }
+        })
+        .catch(err => console.error(err));
+    }
     setShowEditForm(false);
   };
 
