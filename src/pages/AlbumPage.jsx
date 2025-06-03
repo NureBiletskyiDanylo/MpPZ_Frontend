@@ -85,7 +85,7 @@ function AlbumPage() {
     //XXX: we add albumId manually, as the form doesn't save it
     formData.id = albumId;
 
-    fetch(`${API_URL}/api/Album`, {
+    fetch(`${API_URL}/api/Album/${albumId}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${user.token}`,
