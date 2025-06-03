@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import back from '/classic-back.png'
 import '../assets/TemplateForm.css';
 
-function TemplateForm({ onClose }) {
+function TemplateForm({ onClose, albumId }) {
   const navigate = useNavigate();
 
   const templates = [
@@ -21,13 +21,14 @@ function TemplateForm({ onClose }) {
           </button>
           <h2 className="modal-title">Choose Your Perfect Page Template</h2>
         </div>
-        
+
         <div className="templates-grid">
           {templates.map(template => (
-            <div 
+            <div
               key={template.id}
               className="template-card"
-              onClick={() => navigate(`/create/${template.id}`)}
+              onClick={() => navigate(`/create/${template.id}`,
+                { state: { albumId: albumId } })}
             >
               <img src={template.preview} alt={template.name} />
             </div>

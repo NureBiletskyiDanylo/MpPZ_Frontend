@@ -6,6 +6,7 @@ import UserInfo from '../components/UserInfo.jsx';
 import EditProfileForm from '../components/EditProfileForm.jsx';
 import CreateAlbumForm from '../components/CreateAlbumForm.jsx';
 import AlbumCard from '../components/AlbumCard.jsx';
+import { formatISODate } from '../components/AlbumInfo.jsx';
 import '../assets/UserProfile.css';
 import { isEmail, useAuth } from '../AuthContext.jsx';
 
@@ -40,7 +41,7 @@ function UserProfile() {
     fetchAlbums(user.token);
   }, [user, isLoading]);
 
-  const handleEditProfile = async (formData) => {
+  const handleEditProfile = async (formData, imageFile) => {
     if (!isEmail(formData.email)) {
       toast.error(`Invalid email: ${formData.email}`);
       return;
@@ -50,7 +51,7 @@ function UserProfile() {
       return;
     }
 
-    await fetch(`${API_URL}/api/Account/${user.id}`, {
+    fetch(`${API_URL}/api/Account/${user.id}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${user.token}`,
@@ -73,17 +74,44 @@ function UserProfile() {
       .catch(err => {
         console.error('Failed to update user profile:', err);
       });
+
+    if (imageFile) {
+      const formToSend = new FormData();
+      formToSend.append('NewImage', imageFile);
+      fetch(`${API_URL}/api/Account/update-profile`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+        },
+        body: formToSend
+      })
+        .then(res => {
+          console.log(res);
+          if (!res.ok) {
+            toast.error('Failed to set new image!');
+          }
+        })
+        .catch(err => console.error(err));
+    }
     setShowEditForm(false);
   };
 
-  const handleCreateAlbum = async (formData) => {
-    fetch(`${API_URL}/api/Album`, {
+  const handleCreateAlbum = async (formData, imageFile) => {
+    const params = new URLSearchParams({
+      title: formData.title,
+      childDateOfBirth: formData.childDateOfBirth,
+      createdAt: formData.createdAt,
+      ownerId: formData.ownerId
+    });
+    const formDataToSend = new FormData();
+    formDataToSend.append('AlbumImage', imageFile);
+
+    fetch(`${API_URL}/api/Album?${params.toString()}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${user.token}`,
-        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)
+      body: formDataToSend
     })
       .then(res => {
         console.log(res);
@@ -99,6 +127,7 @@ function UserProfile() {
       })
       .catch(err => {
         console.error('Failed to post album:', err);
+        toast.error('Error posting album');
       });
     setShowAlbumForm(false);
   };
@@ -112,6 +141,7 @@ function UserProfile() {
         <UserInfo
           onEditProfile={() => setShowEditForm(true)}
           onCreateAlbum={() => setShowAlbumForm(true)}
+          albums={albums}
         />
 
         <div className='album-list'>
@@ -119,8 +149,9 @@ function UserProfile() {
             <AlbumCard
               key={album.id}
               id={album.id}
+              image={album.albumProfileImage.imageUrl}
               title={album.title}
-              createdAt={album.createdAt}
+              createdAt={formatISODate(album.createdAt)}
               pages={album?.pages}
             />
           ))}

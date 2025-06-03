@@ -1,8 +1,9 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import uploadImage from '/upload-image.png'
 import '../assets/UserProfileForm.css'
 
 function EditProfileForm({ onCancel, onSave, user }) {
+  const [file, setFile] = useState(null);
   const [username, setUsername] = useState(user?.username || '')
   const [email, setEmail] = useState(user?.email || '')
 
@@ -13,20 +14,43 @@ function EditProfileForm({ onCancel, onSave, user }) {
       email: email
     }
 
-    onSave(updatedUser)
+    onSave(updatedUser, file);
   }
+
+  useEffect(() => {
+    return () => {
+      if (file) {
+        URL.revokeObjectURL(file);
+      }
+    };
+  }, [file]);
 
   return (
     <div className='modal'>
       <div className='form-container'>
         <label htmlFor="file" className="custum-file-upload">
-          <div className="icon">
-            <img src={uploadImage} alt='Upload image' className='upload-image' />
-          </div>
-          <div className='upload-text'>
-            <span>Click to upload image</span>
-          </div>
-          <input id="file" type="file" />
+          {file ? (
+            <img
+              src={URL.createObjectURL(file)}
+              alt="Preview"
+              className="upload-preview"
+              style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }}
+            />
+          ) : (
+            <>
+              <div className="icon">
+                <img src={uploadImage} alt='Upload image' className='upload-image' />
+              </div>
+              <div className='upload-text'>
+                <span>Click to upload image</span>
+              </div>
+            </>
+          )}
+          <input
+            id="file"
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
         </label>
 
         <div className='form-left'>

@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router';
 import { useNavigate } from "react-router";
-import { useAuth } from '../AuthContext';
+import { useAuth, isEmail } from '../AuthContext';
 import { toast } from 'react-toastify';
 import '../assets/login.css';
 
 export default function Login() {
   const API_URL = import.meta.env.VITE_API_URL;
+  const { login } = useAuth();
 
   const location = useLocation();
   const initialForm = location.state?.activeForm || 'login';
@@ -23,15 +24,27 @@ export default function Login() {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   }
 
-  //TODO: check that sign up / log in forms are filled with valid data
   const handleSignup = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/Account/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(signupData),
+      if (!isEmail(signupData.email)) {
+        toast.error("Invalid email format.")
+        return;
+      }
+
+      if (!signupData.username || !signupData.email || !signupData.password) {
+        return;
+      }
+      const params = new URLSearchParams({
+        username: signupData.username,
+        email: signupData.email,
+        password: signupData.password
       });
+      const response = await fetch(`${API_URL}/api/Account/register?${params.toString()}`, {
+        method: 'POST',
+      });
+      console.log(signupData);
       const data = await response.text();
+      console.log(data)
       if (response.status != 200) {
         toast.error(`Error: ${data}`);
       } else {
@@ -45,6 +58,10 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
+      if (!isEmail(loginData.email)) {
+        toast.error("Invalid email format.")
+        return;
+      }
       const response = await fetch(`${API_URL}/api/Account/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -62,7 +79,6 @@ export default function Login() {
     }
   }
 
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   const loginUser = (response) => {
@@ -87,18 +103,18 @@ export default function Login() {
         </div>
         <div className={`form-card signup-card ${activeForm === 'signup' ? 'active' : ''}`}>
           <div className='field-wrapper'>
-            <input name='username' type="text" placeholder='' id='name'value={signupData.name} onChange={handleSignupChange} />
+            <input name='username' type="text" placeholder='' id='name' value={signupData.name} onChange={handleSignupChange} />
             <label htmlFor='name' className='label-text'>Name</label>
           </div>
           <div className='field-wrapper'>
-            <input name='email' type="email" placeholder='' id='email-sign-up'value={signupData.email} onChange={handleSignupChange} />
+            <input name='email' type="email" placeholder='' id='email-sign-up' value={signupData.email} onChange={handleSignupChange} />
             <label htmlFor='email-sign-up' className='label-text'>Email</label>
           </div>
           <div className='field-wrapper'>
             <input name='password' type="password" placeholder='' id='password-sign-up' value={signupData.password} onChange={handleSignupChange} />
             <label htmlFor='password-sign-up' className='label-text'>Password</label>
           </div>
-          <div className="button-group">
+          <div className="button-group" style={{ visibility: 'hidden' }}>
             <button className="social-button">
               <img src="/google.png" alt="Google" />
               Google
@@ -121,14 +137,14 @@ export default function Login() {
         </div>
         <div className={`form-card login-card ${activeForm === 'login' ? 'active' : ''}`}>
           <div className='field-wrapper'>
-            <input name='email' type='email' placeholder='' id='email'value={loginData.email} onChange={handleLoginChange} />
+            <input name='email' type='email' placeholder='' id='email' value={loginData.email} onChange={handleLoginChange} />
             <label htmlFor='email' className='label-text'>Email</label>
           </div>
           <div className='field-wrapper'>
             <input name='password' type='password' placeholder='' id='password' value={loginData.password} onChange={handleLoginChange} />
             <label htmlFor='password' className='label-text'>Password</label>
           </div>
-          <div className="button-group">
+          <div className="button-group" style={{ visibility: 'hidden' }}>
             <button className="social-button">
               <img src="/google.png" alt="Google" />
               Google
