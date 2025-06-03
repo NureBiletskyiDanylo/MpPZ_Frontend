@@ -6,10 +6,6 @@
   gap: 45px;
 }
 
-.album-list div {
-  width: 40%
-}
-
 .showcase {
   display: flex;
   margin: 8rem;
