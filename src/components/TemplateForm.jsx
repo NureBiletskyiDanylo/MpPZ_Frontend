@@ -11,6 +11,7 @@ function TemplateForm({ onClose, albumId }) {
     { id: 3, name: 'Only photo theme', preview: '/template-3.png' }
   ];
 
+  console.log("template form, alb id: ", albumId);
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -28,7 +29,7 @@ function TemplateForm({ onClose, albumId }) {
               key={template.id}
               className="template-card"
               onClick={() => navigate(`/create/${template.id}`,
-                { state: { albumId } })}
+                { state: { albumId: albumId } })}
             >
               <img src={template.preview} alt={template.name} />
             </div>

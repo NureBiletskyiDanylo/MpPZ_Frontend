@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useLocation, useNavigate, useParams } from 'react-router'
 import pageImage from '/album-img.png'
 import jellyfish from '/jellyfish.png'
 import whale from '/whale.png'
@@ -7,9 +7,14 @@ import back from '/blue-back.png'
 import wavesLeft from '/waves-left.png'
 import wavesRight from '/waves-right.png'
 import '../assets/CreatePageTemplate1.css'
+import { useAuth } from '../AuthContext'
 
 function CreatePageTemplate1({ mode = 'create', pageData: initialData }) {
+  const location = useLocation();
   const { albumId } = location.state || {};
+
+  console.log('create page tmep, aalb id: ', albumId);
+  const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
   const [text, setText] = useState('');
   const [pageData, setPageData] = useState({
@@ -21,26 +26,38 @@ function CreatePageTemplate1({ mode = 'create', pageData: initialData }) {
   const { pageId } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (mode === 'edit' || mode === 'view') {
-      // Тут має бути запит до API для отримання даних сторінки за id
-      // Приклад:
+  const { user } = useAuth();
 
-      // Тимчасові дані для прикладу:
-      const mockData = {
-        image: '/mother.jpg',
-        text: 'Our amazing trip to the sea...',
-        date: '11/08/2024',
-        title: 'First trip to the sea'
-      };
-      setPageData(mockData);
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    if ((mode === 'edit' || mode === 'view') && pageId) {
+      fetch(`${API_URL}/api/Posts/${pageId}`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          setPageData({
+            image: data.images?.[0]?.imageUrl || '',
+            title: data.title,
+            text: data.text,
+            date: data.dateSetByUser.split('T')[0]
+          });
+        })
+        .catch(err => console.error('Failed to load post:', err));
     }
   }, [mode, pageId]);
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setPageData(prev => ({ ...prev, image: URL.createObjectURL(file) }));
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPageData(prev => ({
+        ...prev,
+        image: URL.createObjectURL(selectedFile)
+      }));
     }
   };
 
@@ -60,11 +77,56 @@ function CreatePageTemplate1({ mode = 'create', pageData: initialData }) {
     navigate(-1);
   }
 
-  const handleSave = () => {
-    // Тут має бути логіка збереження даних (враховуючи, що це може бути як створення, так і редагування)
-    //const url = mode === 'create' ? `/api/templates/${templateId}/pages` : `/api/pages/${templateId}/${pageId}`;
-    //method: mode === 'create' ? 'POST' : 'PUT',
-    navigate(-1);
+  const handleSave = async () => {
+    if (mode === 'create') {
+      const formData = new FormData();
+      formData.append('Title', pageData.title);
+      formData.append('Text', pageData.text);
+      formData.append('AuthorId', user.id); // replace with actual user id
+      formData.append('DateSetByUser', new Date(pageData.date).toISOString());
+      formData.append('TemplateId', 1); // example value, use the correct one
+      if (file) {
+        formData.append('Images', file);
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/Posts/${albumId}`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          },
+          body: formData
+        });
+
+        if (!response.ok) throw new Error('Failed to create post');
+        navigate(-1);
+      } catch (err) {
+        console.error(err);
+      }
+    } else if (mode === 'edit') {
+      const updatedData = {
+        id: pageId,
+        title: pageData.title,
+        text: pageData.text,
+        dateSetByUser: new Date(pageData.date).toISOString()
+      };
+
+      try {
+        const response = await fetch(`${API_URL}/api/Posts`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${user.token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedData)
+        });
+
+        if (!response.ok) throw new Error('Failed to update post');
+        navigate(-1);
+      } catch (err) {
+        console.error(err);
+      }
+    }
   };
 
   return (

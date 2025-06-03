@@ -154,7 +154,9 @@ function AlbumPage() {
               key={page.id}
               pageId={page.id}
               templateId={page.templateId}
-              onClick={() => navigate(`/page/${page.id}`)}
+              onClick={() => navigate(`/pages/${page.id}`, {
+                state: { albumId: albumId }
+              })}
             >
               <div className='page-info'>
                 <h3>{page.title}</h3>
@@ -171,7 +173,7 @@ function AlbumPage() {
           user={user}
           defaultAlbum={album}
         />)}
-      {showTemplateForm && <TemplateForm onClose={() => setShowTemplateForm(false)} />}
+      {showTemplateForm && <TemplateForm onClose={() => setShowTemplateForm(false)} albumId={albumId} />}
     </>
   )
 }
