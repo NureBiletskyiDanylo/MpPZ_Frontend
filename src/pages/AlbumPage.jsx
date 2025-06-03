@@ -116,8 +116,8 @@ function AlbumPage() {
   );
 
   const sortedPages = [...filteredPages].sort((a, b) => {
-    const dateA = new Date(a.date.split('/').reverse().join('-'))
-    const dateB = new Date(b.date.split('/').reverse().join('-'))
+    const dateA = new Date(a.dateSetByUser.split('/').reverse().join('-'))
+    const dateB = new Date(b.dateSetByUser.split('/').reverse().join('-'))
     return sortOrder === 'new-to-old' ? dateB - dateA : dateA - dateB
   });
 
@@ -152,7 +152,7 @@ function AlbumPage() {
           {sortedPages.map((page) => (
             <PageCard
               key={page.id}
-              imageSrc={page.images[0].imageUrl}
+              imageSrc={page?.images?.[0]?.imageUrl}
               title={page.title}
               date={formatISODate(page?.dateSetByUser)}
               pageId={page.id}

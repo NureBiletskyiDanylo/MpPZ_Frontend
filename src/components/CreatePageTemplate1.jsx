@@ -12,11 +12,7 @@ import { useAuth } from '../AuthContext'
 function CreatePageTemplate1({ mode = 'create', pageData: initialData }) {
   const location = useLocation();
   const { albumId } = location.state || {};
-
-  console.log('create page tmep, aalb id: ', albumId);
   const [file, setFile] = useState(null);
-  const [image, setImage] = useState(null);
-  const [text, setText] = useState('');
   const [pageData, setPageData] = useState({
     image: null,
     text: '',
@@ -82,9 +78,9 @@ function CreatePageTemplate1({ mode = 'create', pageData: initialData }) {
       const formData = new FormData();
       formData.append('Title', pageData.title);
       formData.append('Text', pageData.text);
-      formData.append('AuthorId', user.id); // replace with actual user id
+      formData.append('AuthorId', user.id);
       formData.append('DateSetByUser', new Date(pageData.date).toISOString());
-      formData.append('TemplateId', 1); // example value, use the correct one
+      formData.append('TemplateId', 1);
       if (file) {
         formData.append('Images', file);
       }

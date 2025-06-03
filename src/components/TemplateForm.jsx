@@ -11,7 +11,6 @@ function TemplateForm({ onClose, albumId }) {
     { id: 3, name: 'Only photo theme', preview: '/template-3.png' }
   ];
 
-  console.log("template form, alb id: ", albumId);
   return (
     <div className="modal-overlay">
       <div className="modal-content">
