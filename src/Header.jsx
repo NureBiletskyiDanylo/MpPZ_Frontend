@@ -16,8 +16,6 @@ export default function Header() {
 
       <nav className="header-center">
         <Link to="/">Home</Link>
-        <Link to="/pages">Pages</Link>
-        <Link to="/follow">Follow Us</Link>
       </nav>
 
       <div className="header-right">
