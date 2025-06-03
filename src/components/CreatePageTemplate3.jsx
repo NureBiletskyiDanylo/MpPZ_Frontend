@@ -10,6 +10,7 @@ function CreatePageTemplate3({ mode = 'create', pageData: initialData }) {
   const { albumId } = location.state || {};
   const [fileMap, setFileMap] = useState({});
   const [images, setImages] = useState(null);
+
   const [pageData, setPageData] = useState({
     date: new Date().toISOString().split('T')[0],
     title: 'Happy 1st birthday'
@@ -68,7 +69,6 @@ function CreatePageTemplate3({ mode = 'create', pageData: initialData }) {
   const handleBackClick = () => {
     navigate(-1);
   }
-
   const handleSave = async () => {
     if (mode === 'create') {
       const formData = new FormData();

@@ -13,6 +13,7 @@ function CreatePageTemplate1({ mode = 'create', pageData: initialData }) {
   const location = useLocation();
   const { albumId } = location.state || {};
   const [file, setFile] = useState(null);
+
   const [pageData, setPageData] = useState({
     image: null,
     text: '',
