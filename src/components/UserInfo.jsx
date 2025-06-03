@@ -29,7 +29,7 @@ function UserInfo({ onEditProfile, onCreateAlbum }) {
     }
     fetch(`${API_URL}/api/Account/${user.id}`)
       .then(res => res.json())
-      .then(res => setPfp(res.profileImage))
+      .then(res => setPfp(res?.profileImage?.imageUrl))
       .catch(err => console.error(err));
   }, [albums, user]);
 
@@ -37,7 +37,8 @@ function UserInfo({ onEditProfile, onCreateAlbum }) {
     <div className='user-info'>
       <div className='profile-info'>
         <div className='image-placeholder'>
-          <img src={pfp ?? profileIcon} alt='MemoBaby logo' className='logo-image' />
+          <img src={pfp ?? profileIcon} alt='User Picture'
+            style={{ width: '100%', borderRadius: '50%' }} />
         </div>
         <h3>{user.username}</h3>
         <div className='line' />
