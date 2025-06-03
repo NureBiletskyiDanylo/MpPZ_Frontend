@@ -11,7 +11,7 @@ function formatDate(isoDate) {
   }
 }
 
-function formatISODate(dateString) {
+export function formatISODate(dateString) {
   try {
     const date = new Date(dateString);
 
@@ -35,7 +35,7 @@ function AlbumInfo({ onEditAlbum, onCreatePage, album }) {
   return (
     <div className='album-info-container'>
       <div className='image-placeholder'>
-        <img src={albumImage} alt='Album Image' className='album-image' />
+        <img src={album?.albumProfileImage.imageUrl ?? albumImage} alt='Album Image' className='album-image' />
       </div>
       <div className='album-right'>
         <div className='album-info'>

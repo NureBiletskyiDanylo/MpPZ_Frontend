@@ -1,8 +1,10 @@
 import uploadImage from '/upload-image.png'
 import '../assets/UserProfileForm.css'
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
 function CreateAlbumForm({ onCancel, onSave, user, defaultAlbum = {} }) {
+  const [file, setFile] = useState(null);
   const [title, setTitle] = useState(defaultAlbum.title || '');
   const [childDOB, setChildDOB] = useState(defaultAlbum.childDateOfBirth || '');
   const [createdAt, setCreatedAt] = useState(
@@ -11,6 +13,14 @@ function CreateAlbumForm({ onCancel, onSave, user, defaultAlbum = {} }) {
       : ''
   );
 
+  useEffect(() => {
+    return () => {
+      if (file) {
+        URL.revokeObjectURL(file);
+      }
+    };
+  }, [file]);
+
   const handleSubmit = () => {
     const albumData = {
       title,
@@ -18,20 +28,34 @@ function CreateAlbumForm({ onCancel, onSave, user, defaultAlbum = {} }) {
       createdAt: new Date(createdAt).toISOString(),
       ownerId: user.id,
     };
-    onSave(albumData);
+    onSave(albumData, file);
   };
 
   return (
     <div className='modal'>
       <div className='form-container'>
         <label htmlFor="file" className="custum-file-upload">
-          <div className="icon">
-            <img src={uploadImage} alt='Upload image' className='upload-image' />
-          </div>
-          <div className='upload-text'>
-            <span>Click to upload image</span>
-          </div>
-          <input id="file" type="file" />
+          {file ? (
+            <img
+              src={URL.createObjectURL(file)}
+              alt="Preview"
+              className="upload-preview"
+              style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }}
+            />
+          ) : (
+            <>
+              <div className="icon">
+                <img src={uploadImage} alt='Upload image' className='upload-image' />
+              </div>
+              <div className='upload-text'>
+                <span>Click to upload image</span>
+              </div>
+            </>
+          )}
+          <input id="file"
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
         </label>
 
         <div className='form-left'>
