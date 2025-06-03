@@ -56,6 +56,24 @@
     gap: 24px;
 }
 
+.button-share {
+    border: solid 2px #f7f7f7;
+    border-radius: 50%;
+    background-color: unset;
+    color: #f7f7f7;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+.button-share:hover {
+    border: #9C6B52;
+    background-color: #9C6B52;
+}
+
 .album-button .button, .page-card .button{
     border: solid 2px #f7f7f7;
     border-radius: 8px;

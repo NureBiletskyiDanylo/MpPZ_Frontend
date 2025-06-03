@@ -1,5 +1,6 @@
 import albumImage from '/album-img.png'
 import edit from '/edit.png'
+import share from '/share.png'
 import add from '/add.png'
 
 function formatDate(isoDate) {
@@ -31,7 +32,7 @@ export function formatISODate(dateString) {
   }
 }
 
-function AlbumInfo({ onEditAlbum, onCreatePage, album }) {
+function AlbumInfo({ onEditAlbum, onCreatePage, album, onShareAlbum }) {
   return (
     <div className='album-info-container'>
       <div className='image-placeholder'>
@@ -44,6 +45,9 @@ function AlbumInfo({ onEditAlbum, onCreatePage, album }) {
           <p>Created: {formatISODate(album?.createdAt)}</p>
         </div>
         <div className='album-button'>
+          <button className='button-share' onClick={onShareAlbum}>
+            <img src={share} alt='Share album' className='button-icon' />
+          </button>
           <button className='button' onClick={onEditAlbum}>
             <img src={edit} alt='Edit album' className='button-icon' />
             Edit album

@@ -5,6 +5,7 @@ import AlbumInfo, { formatISODate } from '../components/AlbumInfo.jsx'
 import PageCard from '../components/PageCard.jsx'
 import CreateAlbumForm from '../components/CreateAlbumForm.jsx'
 import TemplateForm from '../components/TemplateForm.jsx';
+import ShareForm from '../components/ShareForm.jsx';
 import '../assets/AlbumPage.css'
 import sort from '/sort.png'
 import { useAuth } from '../AuthContext.jsx'
@@ -23,6 +24,7 @@ function AlbumPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('new-to-old');
   const [showTemplateForm, setShowTemplateForm] = useState(false);
+  const [showShareForm, setShowShareForm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -128,6 +130,7 @@ function AlbumPage() {
         <AlbumInfo
           onEditAlbum={() => setShowAlbumForm(true)}
           onCreatePage={() => setShowTemplateForm(true)}
+          onShareAlbum={() => setShowShareForm(true)}
           album={album}
         />
 
@@ -176,6 +179,7 @@ function AlbumPage() {
           defaultAlbum={album}
         />)}
       {showTemplateForm && <TemplateForm onClose={() => setShowTemplateForm(false)} albumId={albumId} />}
+      {showShareForm && <ShareForm onClose={() => setShowShareForm(false)} albumId={albumId} user={user} />}
     </>
   )
 }
