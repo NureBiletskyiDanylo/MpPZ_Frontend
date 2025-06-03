@@ -2,15 +2,53 @@ import Header from "../Header";
 import LoggedHeader from "../components/LoggedHeader";
 import { useAuth } from "../AuthContext";
 import '../assets/home.css'
+import { useEffect, useState } from "react";
+import AlbumCard from "../components/AlbumCard";
+import { formatISODate } from "../components/AlbumInfo";
 
 export default function Login() {
-  const { user } = useAuth(); //FIXME: redundant auth check: split header component?
+  const { user, isLoading } = useAuth();
+  const [albums, setAlbums] = useState([]);
+
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  const fetchAlbums = async (token) => {
+    fetch(`${API_URL}/api/Album/my-albums`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    })
+      .then(res => res.json())
+      .then(data => setAlbums(data))
+      .catch(err => {
+        console.error('Failed to fetch albums:', err);
+      });
+  }
+
+  useEffect(() => {
+    if (isLoading || !user) return;
+    fetchAlbums(user.token);
+  }, [user, isLoading]);
+
   return (
     <>
       {user ? (
         <>
           <LoggedHeader />
-          <h1 style={{ color: '#8a5a44' }}>Hi {user.username}</h1> {/*FIXME: placeholder for actual logged-in user homepage */}
+          <h1 style={{ color: '#8a5a44' }}>Welcome, {user.username}</h1>
+          {albums ? <h2 style={{ color: '#8a5a44' }}>Your albums:</h2> : <h2 style={{ color: '#8a5a44' }}>You have no albums yet</h2>}
+          <div className='album-list-home'>
+            {albums.map((album) => (
+              <AlbumCard
+                key={album.id}
+                id={album.id}
+                image={album.albumProfileImage.imageUrl}
+                title={album.title}
+                createdAt={formatISODate(album.createdAt)}
+                pages={album?.pages}
+              />
+            ))}
+          </div>
         </>
       ) : (
         <>

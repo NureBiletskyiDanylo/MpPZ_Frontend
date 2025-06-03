@@ -1,3 +1,15 @@
+.album-list-home {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 45px;
+}
+
+.album-list div {
+  width: 40%
+}
+
 .showcase {
   display: flex;
   margin: 8rem;
