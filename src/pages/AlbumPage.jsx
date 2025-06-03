@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import LoggedHeader from '../components/LoggedHeader.jsx'
-import AlbumInfo from '../components/AlbumInfo.jsx'
+import AlbumInfo, { formatISODate } from '../components/AlbumInfo.jsx'
 import PageCard from '../components/PageCard.jsx'
 import CreateAlbumForm from '../components/CreateAlbumForm.jsx'
 import TemplateForm from '../components/TemplateForm.jsx';
@@ -152,8 +152,10 @@ function AlbumPage() {
           {sortedPages.map((page) => (
             <PageCard
               key={page.id}
+              imageSrc={page.images[0].imageUrl}
+              title={page.title}
+              date={formatISODate(page?.dateSetByUser)}
               pageId={page.id}
-              templateId={page.templateId}
               onClick={() => navigate(`/pages/${page.id}`, {
                 state: { albumId: albumId }
               })}

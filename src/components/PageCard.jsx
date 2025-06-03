@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router'
 import edit from '/edit.png'
 import pageImage from '/album-img.png'
 
-function PageCard({ children, onClick, pageId }) {
+function PageCard({ imageSrc, date, title, onClick, pageId }) {
   const navigate = useNavigate()
 
   const handleEditClick = (e) => {
@@ -13,15 +13,13 @@ function PageCard({ children, onClick, pageId }) {
   return (
     <div className='page-card' onClick={onClick}>
       <div className='image-placeholder'>
-        <img src={pageImage} alt='Page Image' className='page-img' />
+        <img src={imageSrc ?? pageImage} alt='Page Image' className='page-img' />
       </div>
 
-      {children || (
-        <div className='page-info'>
-          <h3>First birthday</h3>
-          <p>14/02/2025</p>
-        </div>
-      )}
+      <div className='page-info'>
+        <h3>{title}</h3>
+        <p>{date}</p>
+      </div>
 
       <div className='page-card-button'>
         <button className='button' onClick={handleEditClick}>
