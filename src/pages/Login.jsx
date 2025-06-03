@@ -114,7 +114,7 @@ export default function Login() {
             <input name='password' type="password" placeholder='' id='password-sign-up' value={signupData.password} onChange={handleSignupChange} />
             <label htmlFor='password-sign-up' className='label-text'>Password</label>
           </div>
-          <div className="button-group">
+          <div className="button-group" style={{ visibility: 'hidden' }}>
             <button className="social-button">
               <img src="/google.png" alt="Google" />
               Google
@@ -144,7 +144,7 @@ export default function Login() {
             <input name='password' type='password' placeholder='' id='password' value={loginData.password} onChange={handleLoginChange} />
             <label htmlFor='password' className='label-text'>Password</label>
           </div>
-          <div className="button-group">
+          <div className="button-group" style={{ visibility: 'hidden' }}>
             <button className="social-button">
               <img src="/google.png" alt="Google" />
               Google
