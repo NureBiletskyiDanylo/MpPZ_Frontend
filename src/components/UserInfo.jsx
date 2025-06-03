@@ -4,29 +4,13 @@ import edit from '/edit.png'
 import add from '/add.png'
 import { useAuth } from '../AuthContext'
 
-function UserInfo({ onEditProfile, onCreateAlbum }) {
+function UserInfo({ onEditProfile, onCreateAlbum, albums }) {
   const { user } = useAuth();
 
-  const [albums, setAlbums] = useState(null);
   const [pfp, setPfp] = useState(null);
 
   const API_URL = import.meta.env.VITE_API_URL;
   useEffect(() => {
-    if (!albums) {
-      fetch(`${API_URL}/api/Album/my-albums`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${user.token}`,
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(res => res.json())
-        .then(data => setAlbums(data))
-        .catch(err => {
-          console.error("Failed to load albums", err);
-          setAlbums([]); // fallback
-        });
-    }
     fetch(`${API_URL}/api/Account/${user.id}`)
       .then(res => res.json())
       .then(res => setPfp(res?.profileImage?.imageUrl))

@@ -9,6 +9,7 @@ import { formatISODate } from "../components/AlbumInfo";
 export default function Login() {
   const { user, isLoading } = useAuth();
   const [albums, setAlbums] = useState([]);
+  const [sharedAlbums, setSharedAlbums] = useState([]);
 
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -23,11 +24,24 @@ export default function Login() {
       .catch(err => {
         console.error('Failed to fetch albums:', err);
       });
+
+    fetch(`${API_URL}/api/Album/get-allowed-albums`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    })
+      .then(res => res.json())
+      .then(data => setSharedAlbums(data))
+      .catch(err => {
+        console.error('Failed to fetch shared albums:', err);
+      });
   }
 
   useEffect(() => {
     if (isLoading || !user) return;
     fetchAlbums(user.token);
+    // console.log(albums)
+    // setSharedAlbums()
   }, [user, isLoading]);
 
   return (
@@ -36,7 +50,7 @@ export default function Login() {
         <>
           <LoggedHeader />
           <h1 style={{ color: '#8a5a44' }}>Welcome, {user.username}</h1>
-          {albums ? <h2 style={{ color: '#8a5a44' }}>Your albums:</h2> : <h2 style={{ color: '#8a5a44' }}>You have no albums yet</h2>}
+          {albums.length ? <h2 style={{ color: '#8a5a44' }}>Your albums:</h2> : <h2 style={{ color: '#8a5a44' }}>You have no albums yet</h2>}
           <div className='album-list-home'>
             {albums.map((album) => (
               <AlbumCard
@@ -49,6 +63,21 @@ export default function Login() {
               />
             ))}
           </div>
+          {sharedAlbums.length ? <>
+            <h2 style={{ color: '#8a5a44' }}>Shared albums: </h2>
+            <div className="album-list-home">
+              {sharedAlbums.filter(shared => !albums.some(album => album.id === shared.id)).map((album) => (
+                <AlbumCard
+                  key={album.id}
+                  id={album.id}
+                  image={album.albumProfileImage.imageUrl}
+                  title={album.title}
+                  createdAt={formatISODate(album.createdAt)}
+                  pages={album?.pages}
+                />
+              ))}
+            </div>
+          </> : null}
         </>
       ) : (
         <>

@@ -141,6 +141,7 @@ function UserProfile() {
         <UserInfo
           onEditProfile={() => setShowEditForm(true)}
           onCreateAlbum={() => setShowAlbumForm(true)}
+          albums={albums}
         />
 
         <div className='album-list'>
